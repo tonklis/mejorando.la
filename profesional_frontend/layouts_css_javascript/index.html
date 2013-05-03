@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <link rel="stylesheet" href="bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="estilos.css" />
+    <script src="jquery-2.0.0.min.js"></script>
+    <title>Aprendiendo con Mejorando.la</title>
+    <style>
+      .row-fluid .span9 {
+        background: #EDEDED;
+        border: 1px solid;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <h1>Todo List<small> Ejemplo para Mejorando.la</small></h1>
+      <div class="row" id="formulario">
+        <div class="span6 offset3">
+          <form action="" class="form-inline">
+            <fieldset>
+              <input type="text" placeholder="Agregar item"></input>
+              <input type="button" value="Agregar" class="btn btn-primary" id="botoncito"></input>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      <div class="row" id="lista">
+        <div class="span6 offset3">
+          <label for="todo1" class="checkbox">
+            <input name="todo1" id="todo1" type="checkbox">Sacar la Basura
+            </input>
+          </label>
+          <label for="todo2" class="checkbox">
+            <input name="todo2" id="todo2" type="checkbox">Pasear al Perro
+            </input>
+          </label>
+          <label for="todo3" class="checkbox">
+            <input name="todo3" id="todo3" type="checkbox">Aprender Javascript
+            </input>
+          </label>
+        </div>
+      </div>
+    </div>
+    <script>
+      // TEST de como pasar parámetros al evento
+      function clickme(event){
+        console.log(event.data);
+      } 
+      $("#botoncito").on('click', null, 3, clickme);
+    </script>
+  </body>
+</html>
