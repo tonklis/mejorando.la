@@ -1,0 +1,15 @@
+doctype 5
+html(lang="es")
+  head
+    title #{titulo}
+    link(href="style.css", rel="stylesheet", media="screen", type="text/css")
+    script(src="jquery.js")
+    script(src="socket.io/socket.io.js")
+    script(src="grid.js")
+    script(src="root.js")
+  body
+    h1  #{titulo}
+    p
+      span color:
+      input(value="#000000", id="input")
+    #grid

@@ -1,48 +1,27 @@
-var express = require('express'),
-    swig = require('swig'),
-    cons = require('consolidate');
+var express    = require('express');
+var app        = express();
+var server     = require('http').createServer(app);
+var io         = require('socket.io').listen(server);
+var cons       = require('consolidate');
 
-var app = express();
+server.listen(3000);
 
-swig.init({
-  cache: false
-});
-
-// View engine
-app.engine('.html', cons.swig);
+app.engine('.html', cons.jade);
 app.set('view engine', 'html');
-app.set('views', './views');
 
-// Static files
 app.use(express.static('./public'));
 
-// Post
-app.use(express.bodyParser());
-app.use(express.cookieParser());
-
-var mensajes = [],
-    ress = [];
-
-
-app.get("/", function (req, res){
-  res.render('home', {
-    mensajes: mensajes
+app.get('/', function(req, res) {
+  res.render('index.html', {
+    titulo: 'Application Grip'
   });
 });
 
-app.post("/mensajes/new", function(req, res){
-  mensajes.push(req.body.mensaje);
+io.sockets.on('connection', connection);
 
-  ress.forEach(function(res){
-    res.send(mensajes);
+function connection(socket){
+  console.log('hola');
+  socket.on('pintar', function(data){
+    socket.broadcast.emit('pintar', data);
   });
-  res.send('Tu mensaje es ' + req.body.mensaje);
-});
-
-app.get("/mensajes/list", function(req, res){
-  ress.push(res);
-  //res.send(mensajes+'<script>setTimeout(function(){window.location.reload()}, 1000);</script>');
-});
-
-app.listen(3000);
-console.log("Application working");
+}
